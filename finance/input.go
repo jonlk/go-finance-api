@@ -12,6 +12,12 @@ type compoundInterest struct {
 	LengthBorrowedInYears        float64 `json:"lengthBorrowedInYears"`
 }
 
+type simpleInterest struct {
+	Principal             float64 `json:"principal"`
+	AnnualInterestRate    float64 `json:"annualInterestRate"`
+	LengthBorrowedInYears float64 `json:"lengthBorrowedInYears"`
+}
+
 type peRatio struct {
 	PricePerShare    float64 `json:"pricePerShare"`
 	EarningsPerShare float64 `json:"earningsPerShare"`
@@ -30,4 +36,9 @@ type netIncome struct {
 type cashFlow struct {
 	Income   float64 `json:"income"`
 	Expenses float64 `json:"expenses"`
+}
+
+type variationOfInvestment struct {
+	CurrentPrice  float64 `json:"currentPrice"`
+	PurchasePrice float64 `json:"purchasePrice"`
 }

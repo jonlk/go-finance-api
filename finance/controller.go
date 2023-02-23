@@ -11,51 +11,41 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	//NetWorth
 	apiGroup.POST("/networth", func(ctx *gin.Context) {
-
 		var nw netWorth
 		ctx.ShouldBindJSON(&nw)
 		result := calculateNetWorth(nw)
-
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
 	//CompoundInterest
 	apiGroup.POST("/compoundinterest", func(ctx *gin.Context) {
-
 		var ci compoundInterest
 		ctx.ShouldBindJSON(&ci)
 		result := calculateCompoundInterest(ci)
-
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
 	//PriceToEarningsRatio
 	apiGroup.POST("/peratio", func(ctx *gin.Context) {
-
 		var pe peRatio
 		ctx.ShouldBindJSON(&pe)
 		result := calculatePriceToEarningsRatio(pe)
-
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
 	//BreakEvenPoint
 	apiGroup.POST("/breakevenpoint", func(ctx *gin.Context) {
-
 		var bep breakEvenPoint
 		ctx.ShouldBindJSON(&bep)
 		result := calculateBreakEvenPoint(bep)
-
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
 	//NetIncome
 	apiGroup.POST("/netincome", func(ctx *gin.Context) {
-
 		var ni netIncome
 		ctx.ShouldBindJSON(&ni)
 		result := calculateNetIncome(ni)
-
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
@@ -64,7 +54,22 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		var cf cashFlow
 		ctx.ShouldBindJSON(&cf)
 		result := calculateCashFlow(cf)
+		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	})
 
+	//Simple Interest
+	apiGroup.POST("/simpleinterest", func(ctx *gin.Context) {
+		var si simpleInterest
+		ctx.ShouldBindJSON(&si)
+		result := calculateSimpleInterest(si)
+		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	})
+
+	//Variation of Investment
+	apiGroup.POST("/variationofinvestment", func(ctx *gin.Context) {
+		var vi variationOfInvestment
+		ctx.ShouldBindJSON(&vi)
+		result := calculateVariationOfInvestment(vi)
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 }
