@@ -22,3 +22,7 @@ func calculateBreakEvenPoint(bep breakEvenPoint) float64 {
 func calculateNetIncome(ni netIncome) float64 {
 	return ni.Revenue - ni.Expenses
 }
+
+func calculateCashFlow(cf cashFlow) float64 {
+	return cf.Income - cf.Expenses
+}
