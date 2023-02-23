@@ -6,8 +6,7 @@ func calculateNetWorth(nw netWorth) float64 {
 
 func calculateCompoundInterest(ci compoundInterest) float64 {
 	return ci.Principal *
-		(1 + ci.AnnualInterestRate/
-			ci.NumberTimesCompoundedPerYear) *
+		(1 + (ci.AnnualInterestRate / ci.NumberTimesCompoundedPerYear)) *
 		(ci.NumberTimesCompoundedPerYear * ci.LengthBorrowedInYears)
 }
 
@@ -25,4 +24,14 @@ func calculateNetIncome(ni netIncome) float64 {
 
 func calculateCashFlow(cf cashFlow) float64 {
 	return cf.Income - cf.Expenses
+}
+
+func calculateSimpleInterest(si simpleInterest) float64 {
+	return si.Principal *
+		si.AnnualInterestRate *
+		si.LengthBorrowedInYears
+}
+
+func calculateVariationOfInvestment(vi variationOfInvestment) float64 {
+	return (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
 }
