@@ -1,2 +1,2 @@
-# go-finance-api
-Simple finance calculations with the gin gonic api
+# Finance Api
+Simple finance calculations over http with the gin gonic framework
