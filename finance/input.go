@@ -26,3 +26,8 @@ type netIncome struct {
 	Revenue  float64 `json:"revenue"`
 	Expenses float64 `json:"expenses"`
 }
+
+type cashFlow struct {
+	Income   float64 `json:"income"`
+	Expenses float64 `json:"expenses"`
+}

@@ -9,43 +9,62 @@ import (
 
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
-	//calculateNetWorth
+	//NetWorth
 	apiGroup.POST("/networth", func(ctx *gin.Context) {
-		var netWorth netWorth
-		ctx.ShouldBindJSON(&netWorth)
-		result := calculateNetWorth(netWorth)
+
+		var nw netWorth
+		ctx.ShouldBindJSON(&nw)
+		result := calculateNetWorth(nw)
+
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
-	//calculateCompoundInterest
+	//CompoundInterest
 	apiGroup.POST("/compoundinterest", func(ctx *gin.Context) {
-		var compoundInterest compoundInterest
-		ctx.ShouldBindJSON(&compoundInterest)
-		result := calculateCompoundInterest(compoundInterest)
+
+		var ci compoundInterest
+		ctx.ShouldBindJSON(&ci)
+		result := calculateCompoundInterest(ci)
+
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
-	//calculatePriceToEarningsRatio
+	//PriceToEarningsRatio
 	apiGroup.POST("/peratio", func(ctx *gin.Context) {
-		var peRatio peRatio
-		ctx.ShouldBindJSON(&peRatio)
-		result := calculatePriceToEarningsRatio(peRatio)
+
+		var pe peRatio
+		ctx.ShouldBindJSON(&pe)
+		result := calculatePriceToEarningsRatio(pe)
+
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
-	//calculateBreakEvenPoint
+	//BreakEvenPoint
 	apiGroup.POST("/breakevenpoint", func(ctx *gin.Context) {
-		var breakEvenPoint breakEvenPoint
-		ctx.ShouldBindJSON(&breakEvenPoint)
-		result := calculateBreakEvenPoint(breakEvenPoint)
+
+		var bep breakEvenPoint
+		ctx.ShouldBindJSON(&bep)
+		result := calculateBreakEvenPoint(bep)
+
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 
-	//calculateNetIncome
+	//NetIncome
 	apiGroup.POST("/netincome", func(ctx *gin.Context) {
-		var netIncome netIncome
-		ctx.ShouldBindJSON(&netIncome)
-		result := calculateNetIncome(netIncome)
+
+		var ni netIncome
+		ctx.ShouldBindJSON(&ni)
+		result := calculateNetIncome(ni)
+
+		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	})
+
+	//CashFlow
+	apiGroup.POST("/cashflow", func(ctx *gin.Context) {
+		var cf cashFlow
+		ctx.ShouldBindJSON(&cf)
+		result := calculateCashFlow(cf)
+
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 	})
 }
