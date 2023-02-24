@@ -48,3 +48,8 @@ func calculateRuleOf72(compoundInterestRate float64) float64 {
 	result := 72 / compoundInterestRate
 	return result
 }
+
+func calculateBasicLiquidityRatio(blr basicLiquidityRatio) float64 {
+	result := blr.MonetaryAssets / blr.MonthlyExpenses
+	return result
+}

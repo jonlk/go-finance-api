@@ -42,3 +42,8 @@ type variationOfInvestment struct {
 	CurrentPrice  float64 `json:"currentPrice"`
 	PurchasePrice float64 `json:"purchasePrice"`
 }
+
+type basicLiquidityRatio struct {
+	MonetaryAssets  float64 `json:"monetaryAssets"`
+	MonthlyExpenses float64 `json:"monthlyExpenses"`
+}
