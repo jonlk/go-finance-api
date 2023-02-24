@@ -84,4 +84,12 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 			ctx.String(http.StatusBadRequest, "Could not parse float")
 		}
 	})
+
+	//Basic Liquidity Ratio
+	apiGroup.POST("/basicliquidityratio", func(ctx *gin.Context) {
+		var blr basicLiquidityRatio
+		ctx.ShouldBindJSON(&blr)
+		result := calculateBasicLiquidityRatio(blr)
+		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	})
 }
