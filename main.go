@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jonlk/go-finance-api/finance"
+	"github.com/jonlk/go-finance-api/web"
 )
 
 func main() {
@@ -15,6 +16,7 @@ func main() {
 	}
 
 	router := gin.Default()
+	web.RegisterMiddleware(router)
 
 	apiGroup := router.Group("/api")
 	finance.RegisterRoutes(apiGroup)
