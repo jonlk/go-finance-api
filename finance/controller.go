@@ -3,6 +3,7 @@ package finance
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -71,5 +72,16 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		ctx.ShouldBindJSON(&vi)
 		result := calculateVariationOfInvestment(vi)
 		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	})
+
+	//Rule of 72
+	apiGroup.GET("/ruleof72/:cir", func(ctx *gin.Context) {
+		input := ctx.Param("cir")
+		if value, err := strconv.ParseFloat(input, 64); err == nil {
+			result := calculateRuleOf72(value)
+			ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+		} else {
+			ctx.String(http.StatusBadRequest, "Could not parse float")
+		}
 	})
 }

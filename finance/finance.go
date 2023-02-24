@@ -43,3 +43,8 @@ func calculateVariationOfInvestment(vi variationOfInvestment) float64 {
 	result := (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
 	return result
 }
+
+func calculateRuleOf72(compoundInterestRate float64) float64 {
+	result := 72 / compoundInterestRate
+	return result
+}
