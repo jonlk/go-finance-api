@@ -15,6 +15,7 @@ func main() {
 	}
 
 	router := gin.Default()
+
 	apiGroup := router.Group("/api")
 	finance.RegisterRoutes(apiGroup)
 	log.Fatal(router.Run(":3000"))
