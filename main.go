@@ -8,14 +8,9 @@ import (
 )
 
 func main() {
-
 	//gin.SetMode(gin.ReleaseMode)
-
 	router := gin.Default()
 	apiGroup := router.Group("/api")
-
 	finance.RegisterRoutes(apiGroup)
-
-	//starts the server
 	log.Fatal(router.Run(":3000"))
 }

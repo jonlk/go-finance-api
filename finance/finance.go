@@ -1,37 +1,45 @@
 package finance
 
 func calculateNetWorth(nw netWorth) float64 {
-	return nw.Assets - nw.Debts
+	result := nw.Assets - nw.Debts
+	return result
 }
 
 func calculateCompoundInterest(ci compoundInterest) float64 {
-	return ci.Principal *
+	result := ci.Principal *
 		(1 + (ci.AnnualInterestRate / ci.NumberTimesCompoundedPerYear)) *
 		(ci.NumberTimesCompoundedPerYear * ci.LengthBorrowedInYears)
+	return result
 }
 
 func calculatePriceToEarningsRatio(pe peRatio) float64 {
-	return pe.PricePerShare / pe.EarningsPerShare
+	result := pe.PricePerShare / pe.EarningsPerShare
+	return result
 }
 
 func calculateBreakEvenPoint(bep breakEvenPoint) float64 {
-	return bep.FixedExpenses / bep.GrossProfitMarginInPercentage
+	result := bep.FixedExpenses / bep.GrossProfitMarginInPercentage
+	return result
 }
 
 func calculateNetIncome(ni netIncome) float64 {
-	return ni.Revenue - ni.Expenses
+	result := ni.Revenue - ni.Expenses
+	return result
 }
 
 func calculateCashFlow(cf cashFlow) float64 {
-	return cf.Income - cf.Expenses
+	result := cf.Income - cf.Expenses
+	return result
 }
 
 func calculateSimpleInterest(si simpleInterest) float64 {
-	return si.Principal *
+	result := si.Principal *
 		si.AnnualInterestRate *
 		si.LengthBorrowedInYears
+	return result
 }
 
 func calculateVariationOfInvestment(vi variationOfInvestment) float64 {
-	return (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
+	result := (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
+	return result
 }
