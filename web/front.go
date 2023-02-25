@@ -3,24 +3,19 @@ package web
 import (
 	"log"
 
-	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
+	"github.com/jonlk/go-finance-api/finance"
 )
 
-func RegisterMiddleware(router *gin.Engine) {
-	router.Use(gzip.Gzip(gzip.BestSpeed))
-	router.Use(errorHandler)
-}
+func StartService() {
 
-var errorHandler = func(ctx *gin.Context) {
+	router := gin.Default()
 
-	ctx.Next()
+	registerMiddleware(router)
 
-	for _, err := range ctx.Errors {
-		log.Print(map[string]any{
-			"Err":  err.Error(),
-			"Type": err.Type,
-			"Meta": err.Meta,
-		})
-	}
+	apiGroup := router.Group("/api")
+
+	finance.RegisterRoutes(apiGroup)
+
+	log.Fatal(router.Run(":3000"))
 }
