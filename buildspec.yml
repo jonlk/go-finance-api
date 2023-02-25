@@ -3,16 +3,17 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...      
-      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASS}
+      - echo Logging in to Amazon ECR... 
+      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com     
+      # - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASS}
   build:
     commands:      
       - docker build -t ${IMAGE_NAME}:${VERSION_NUMBER}-${CODEBUILD_BUILD_NUMBER} .      
       - docker tag ${IMAGE_NAME}:${VERSION_NUMBER}-${CODEBUILD_BUILD_NUMBER} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}:${VERSION_NUMBER}-${CODEBUILD_BUILD_NUMBER}
-      - docker logout
+      # - docker logout
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
+      # - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
       - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}:${VERSION_NUMBER}-${CODEBUILD_BUILD_NUMBER}
