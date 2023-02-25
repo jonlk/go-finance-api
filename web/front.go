@@ -8,14 +8,9 @@ import (
 )
 
 func StartService() {
-
 	router := gin.Default()
-
 	registerMiddleware(router)
-
 	apiGroup := router.Group("/api")
-
 	finance.RegisterRoutes(apiGroup)
-
 	log.Fatal(router.Run(":3000"))
 }

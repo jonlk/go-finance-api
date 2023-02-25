@@ -9,7 +9,7 @@ import (
 )
 
 func calculationResponse(c calculation, ctx *gin.Context) {
-	result := calculateResult(c)
+	result := c.calculate()
 	ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
 }
 

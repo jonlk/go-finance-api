@@ -4,10 +4,6 @@ type calculation interface {
 	calculate() float64
 }
 
-func calculateResult(c calculation) float64 {
-	return c.calculate()
-}
-
 func (blr basicLiquidityRatio) calculate() float64 {
 	result := blr.MonetaryAssets / blr.MonthlyExpenses
 	return result
