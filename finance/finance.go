@@ -1,55 +1,63 @@
 package finance
 
-func calculateNetWorth(nw netWorth) float64 {
-	result := nw.Assets - nw.Debts
+type calculation interface {
+	calculate() float64
+}
+
+func calculateResult(c calculation) float64 {
+	return c.calculate()
+}
+
+func (blr basicLiquidityRatio) calculate() float64 {
+	result := blr.MonetaryAssets / blr.MonthlyExpenses
 	return result
 }
 
-func calculateCompoundInterest(ci compoundInterest) float64 {
+func (bep breakEvenPoint) calculate() float64 {
+	result := bep.FixedExpenses / bep.GrossProfitMarginInPercentage
+	return result
+}
+
+func (cf cashFlow) calculate() float64 {
+	result := cf.Income - cf.Expenses
+	return result
+}
+
+func (ci compoundInterest) calculate() float64 {
 	result := ci.Principal *
 		(1 + (ci.AnnualInterestRate / ci.NumberTimesCompoundedPerYear)) *
 		(ci.NumberTimesCompoundedPerYear * ci.LengthBorrowedInYears)
 	return result
 }
 
-func calculatePriceToEarningsRatio(pe peRatio) float64 {
-	result := pe.PricePerShare / pe.EarningsPerShare
-	return result
+func (ci compoundInterestRate) calculate() float64 {
+	result := 72 / ci
+	return float64(result)
 }
 
-func calculateBreakEvenPoint(bep breakEvenPoint) float64 {
-	result := bep.FixedExpenses / bep.GrossProfitMarginInPercentage
-	return result
-}
-
-func calculateNetIncome(ni netIncome) float64 {
+func (ni netIncome) calculate() float64 {
 	result := ni.Revenue - ni.Expenses
 	return result
 }
 
-func calculateCashFlow(cf cashFlow) float64 {
-	result := cf.Income - cf.Expenses
+func (nw netWorth) calculate() float64 {
+	result := nw.Assets - nw.Debts
 	return result
 }
 
-func calculateSimpleInterest(si simpleInterest) float64 {
+func (pe peRatio) calculate() float64 {
+	result := pe.PricePerShare / pe.EarningsPerShare
+	return result
+}
+
+func (si simpleInterest) calculate() float64 {
 	result := si.Principal *
 		si.AnnualInterestRate *
 		si.LengthBorrowedInYears
 	return result
 }
 
-func calculateVariationOfInvestment(vi variationOfInvestment) float64 {
+func (vi variationOfInvestment) calculate() float64 {
 	result := (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
-	return result
-}
-
-func calculateRuleOf72(compoundInterestRate float64) float64 {
-	result := 72 / compoundInterestRate
-	return result
-}
-
-func calculateBasicLiquidityRatio(blr basicLiquidityRatio) float64 {
-	result := blr.MonetaryAssets / blr.MonthlyExpenses
 	return result
 }

@@ -8,88 +8,73 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func calculationResponse(c calculation, ctx *gin.Context) {
+	result := calculateResult(c)
+	ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+}
+
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
-	//NetWorth
-	apiGroup.POST("/networth", func(ctx *gin.Context) {
-		var nw netWorth
-		ctx.ShouldBindJSON(&nw)
-		result := calculateNetWorth(nw)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	apiGroup.POST("/basicliquidityratio", func(ctx *gin.Context) {
+		var blr basicLiquidityRatio
+		ctx.ShouldBindJSON(&blr)
+		calculationResponse(blr, ctx)
 	})
 
-	//CompoundInterest
-	apiGroup.POST("/compoundinterest", func(ctx *gin.Context) {
-		var ci compoundInterest
-		ctx.ShouldBindJSON(&ci)
-		result := calculateCompoundInterest(ci)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
-	})
-
-	//PriceToEarningsRatio
-	apiGroup.POST("/peratio", func(ctx *gin.Context) {
-		var pe peRatio
-		ctx.ShouldBindJSON(&pe)
-		result := calculatePriceToEarningsRatio(pe)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
-	})
-
-	//BreakEvenPoint
 	apiGroup.POST("/breakevenpoint", func(ctx *gin.Context) {
 		var bep breakEvenPoint
 		ctx.ShouldBindJSON(&bep)
-		result := calculateBreakEvenPoint(bep)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+		calculationResponse(bep, ctx)
 	})
 
-	//NetIncome
-	apiGroup.POST("/netincome", func(ctx *gin.Context) {
-		var ni netIncome
-		ctx.ShouldBindJSON(&ni)
-		result := calculateNetIncome(ni)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
-	})
-
-	//CashFlow
 	apiGroup.POST("/cashflow", func(ctx *gin.Context) {
 		var cf cashFlow
 		ctx.ShouldBindJSON(&cf)
-		result := calculateCashFlow(cf)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+		calculationResponse(cf, ctx)
 	})
 
-	//Simple Interest
-	apiGroup.POST("/simpleinterest", func(ctx *gin.Context) {
-		var si simpleInterest
-		ctx.ShouldBindJSON(&si)
-		result := calculateSimpleInterest(si)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	apiGroup.POST("/compoundinterest", func(ctx *gin.Context) {
+		var ci compoundInterest
+		ctx.ShouldBindJSON(&ci)
+		calculationResponse(ci, ctx)
 	})
 
-	//Variation of Investment
-	apiGroup.POST("/variationofinvestment", func(ctx *gin.Context) {
-		var vi variationOfInvestment
-		ctx.ShouldBindJSON(&vi)
-		result := calculateVariationOfInvestment(vi)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	apiGroup.POST("/netincome", func(ctx *gin.Context) {
+		var ni netIncome
+		ctx.ShouldBindJSON(&ni)
+		calculationResponse(ni, ctx)
 	})
 
-	//Rule of 72
+	apiGroup.POST("/networth", func(ctx *gin.Context) {
+		var nw netWorth
+		ctx.ShouldBindJSON(&nw)
+		calculationResponse(nw, ctx)
+	})
+
+	apiGroup.POST("/peratio", func(ctx *gin.Context) {
+		var pe peRatio
+		ctx.ShouldBindJSON(&pe)
+		calculationResponse(pe, ctx)
+	})
+
 	apiGroup.GET("/ruleof72/:cir", func(ctx *gin.Context) {
 		input := ctx.Param("cir")
 		if value, err := strconv.ParseFloat(input, 64); err == nil {
-			result := calculateRuleOf72(value)
-			ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+			calculationResponse(compoundInterestRate(value), ctx)
 		} else {
 			ctx.String(http.StatusBadRequest, "Could not parse float")
 		}
 	})
 
-	//Basic Liquidity Ratio
-	apiGroup.POST("/basicliquidityratio", func(ctx *gin.Context) {
-		var blr basicLiquidityRatio
-		ctx.ShouldBindJSON(&blr)
-		result := calculateBasicLiquidityRatio(blr)
-		ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+	apiGroup.POST("/simpleinterest", func(ctx *gin.Context) {
+		var si simpleInterest
+		ctx.ShouldBindJSON(&si)
+		calculationResponse(si, ctx)
+	})
+
+	apiGroup.POST("/variationofinvestment", func(ctx *gin.Context) {
+		var vi variationOfInvestment
+		ctx.ShouldBindJSON(&vi)
+		calculationResponse(vi, ctx)
 	})
 }
