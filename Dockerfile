@@ -15,5 +15,4 @@ FROM alpine:3.17 as publish
 
 COPY --from=build /finance-api ./
 
-EXPOSE 3000
 CMD [ "/finance-api","-r" ]
