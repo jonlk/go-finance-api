@@ -8,16 +8,20 @@ import (
 )
 
 func registerMiddleware(router *gin.Engine) {
-
 	router.Use(gzip.Gzip(gzip.BestSpeed))
-	router.Use(customMiddleware)
+	router.Use(exampleCustomMiddleware)
 	router.Use(errorHandler)
-
 }
 
-var customMiddleware = func(ctx *gin.Context) {
-	//EXAMPLE: add a custom return header
+var exampleCustomMiddleware = func(ctx *gin.Context) {
+
+	//Retrieve a header on request
+	interceptedHeader := ctx.GetHeader("Content-Type")
+	log.Printf("The Content-Type header is: %v\n", interceptedHeader)
+
+	//Or add a custom return header in response
 	ctx.Header("Custom-Header", "Returned to client")
+
 	ctx.Next()
 }
 
