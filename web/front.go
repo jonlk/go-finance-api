@@ -19,7 +19,7 @@ func StartService() {
 
 	finance.RegisterRoutes(apiGroup)
 
-	log.Fatal(router.Run(":3000"))
+	log.Fatal(router.Run(":80"))
 }
 
 func registerHealthCheck(apiGroup *gin.RouterGroup) {
