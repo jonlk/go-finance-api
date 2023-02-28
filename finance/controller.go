@@ -3,7 +3,6 @@ package finance
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,66 +14,93 @@ func calculationResponse(c calculation, ctx *gin.Context) {
 
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
-	apiGroup.POST("/basicliquidityratio", func(ctx *gin.Context) {
+	apiGroup.GET("/basicliquidityratio", func(ctx *gin.Context) {
 		var blr basicLiquidityRatio
-		ctx.ShouldBindJSON(&blr)
-		calculationResponse(blr, ctx)
-	})
-
-	apiGroup.POST("/breakevenpoint", func(ctx *gin.Context) {
-		var bep breakEvenPoint
-		ctx.ShouldBindJSON(&bep)
-		calculationResponse(bep, ctx)
-	})
-
-	apiGroup.POST("/cashflow", func(ctx *gin.Context) {
-		var cf cashFlow
-		ctx.ShouldBindJSON(&cf)
-		calculationResponse(cf, ctx)
-	})
-
-	apiGroup.POST("/compoundinterest", func(ctx *gin.Context) {
-		var ci compoundInterest
-		ctx.ShouldBindJSON(&ci)
-		calculationResponse(ci, ctx)
-	})
-
-	apiGroup.POST("/netincome", func(ctx *gin.Context) {
-		var ni netIncome
-		ctx.ShouldBindJSON(&ni)
-		calculationResponse(ni, ctx)
-	})
-
-	apiGroup.POST("/networth", func(ctx *gin.Context) {
-		var nw netWorth
-		ctx.ShouldBindJSON(&nw)
-		calculationResponse(nw, ctx)
-	})
-
-	apiGroup.POST("/peratio", func(ctx *gin.Context) {
-		var pe peRatio
-		ctx.ShouldBindJSON(&pe)
-		calculationResponse(pe, ctx)
-	})
-
-	apiGroup.GET("/ruleof72/:cir", func(ctx *gin.Context) {
-		input := ctx.Param("cir")
-		if value, err := strconv.ParseFloat(input, 64); err == nil {
-			calculationResponse(compoundInterestRate(value), ctx)
+		if err := ctx.Bind(&blr); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			ctx.String(http.StatusBadRequest, "Could not parse float")
+			calculationResponse(blr, ctx)
 		}
 	})
 
-	apiGroup.POST("/simpleinterest", func(ctx *gin.Context) {
-		var si simpleInterest
-		ctx.ShouldBindJSON(&si)
-		calculationResponse(si, ctx)
+	apiGroup.GET("/breakevenpoint", func(ctx *gin.Context) {
+		var bep breakEvenPoint
+		if err := ctx.Bind(&bep); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(bep, ctx)
+		}
 	})
 
-	apiGroup.POST("/variationofinvestment", func(ctx *gin.Context) {
+	apiGroup.GET("/cashflow", func(ctx *gin.Context) {
+		var cf cashFlow
+		if err := ctx.Bind(&cf); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(cf, ctx)
+		}
+	})
+
+	apiGroup.GET("/compoundinterest", func(ctx *gin.Context) {
+		var ci compoundInterest
+		if err := ctx.Bind(&ci); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(ci, ctx)
+		}
+	})
+
+	apiGroup.GET("/netincome", func(ctx *gin.Context) {
+		var ni netIncome
+		if err := ctx.Bind(&ni); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(ni, ctx)
+		}
+	})
+
+	apiGroup.GET("/networth", func(ctx *gin.Context) {
+		var nw netWorth
+		if err := ctx.Bind(&nw); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(nw, ctx)
+		}
+	})
+
+	apiGroup.GET("/peratio", func(ctx *gin.Context) {
+		var pe peRatio
+		if err := ctx.Bind(&pe); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(pe, ctx)
+		}
+	})
+
+	apiGroup.GET("/ruleof72", func(ctx *gin.Context) {
+		var cir compoundInterestRate
+		if err := ctx.Bind(&cir); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(cir, ctx)
+		}
+	})
+
+	apiGroup.GET("/simpleinterest", func(ctx *gin.Context) {
+		var si simpleInterest
+		if err := ctx.Bind(&si); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(si, ctx)
+		}
+	})
+
+	apiGroup.GET("/variationofinvestment", func(ctx *gin.Context) {
 		var vi variationOfInvestment
-		ctx.ShouldBindJSON(&vi)
-		calculationResponse(vi, ctx)
+		if err := ctx.Bind(&vi); err != nil {
+			ctx.String(http.StatusBadRequest, err.Error())
+		} else {
+			calculationResponse(vi, ctx)
+		}
 	})
 }
