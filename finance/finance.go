@@ -1,5 +1,7 @@
 package finance
 
+import "math"
+
 type calculation interface {
 	calculate() float64
 }
@@ -21,8 +23,8 @@ func (cf cashFlow) calculate() float64 {
 
 func (ci compoundInterest) calculate() float64 {
 	result := ci.Principal *
-		(1 + (ci.AnnualInterestRate / ci.NumberTimesCompoundedPerYear)) *
-		(ci.NumberTimesCompoundedPerYear * ci.LengthBorrowedInYears)
+		math.Pow(1+(ci.AnnualInterestRate/ci.NumberTimesCompoundedPerYear),
+			ci.NumberTimesCompoundedPerYear*ci.LengthBorrowedInYears)
 	return result
 }
 
