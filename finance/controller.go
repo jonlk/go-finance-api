@@ -1,15 +1,30 @@
 package finance
 
 import (
-	"fmt"
 	"net/http"
+	"reflect"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
-func calculationResponse(c calculation, ctx *gin.Context) {
-	result := c.calculate()
-	ctx.String(http.StatusOK, fmt.Sprintf("%.2f", result))
+type calculationResponse struct {
+	ResponseId      uuid.UUID `json:"responseId"`
+	Timestamp       int64     `json:"timestamp"`
+	CalculationType string    `json:"calculationType"`
+	Value           float64   `json:"value"`
+}
+
+func buildCalculationResponse(c calculation, ctx *gin.Context) {
+	value := c.calculate()
+	response := calculationResponse{
+		ResponseId:      uuid.New(),
+		Timestamp:       time.Now().Unix(),
+		CalculationType: reflect.TypeOf(c).Name(),
+		Value:           value,
+	}
+	ctx.JSON(http.StatusOK, &response)
 }
 
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
@@ -19,7 +34,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&blr); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(blr, ctx)
+			buildCalculationResponse(blr, ctx)
 		}
 	})
 
@@ -28,7 +43,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&bep); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(bep, ctx)
+			buildCalculationResponse(bep, ctx)
 		}
 	})
 
@@ -37,7 +52,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&cf); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(cf, ctx)
+			buildCalculationResponse(cf, ctx)
 		}
 	})
 
@@ -46,7 +61,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&ci); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(ci, ctx)
+			buildCalculationResponse(ci, ctx)
 		}
 	})
 
@@ -55,7 +70,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&ni); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(ni, ctx)
+			buildCalculationResponse(ni, ctx)
 		}
 	})
 
@@ -64,7 +79,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&nw); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(nw, ctx)
+			buildCalculationResponse(nw, ctx)
 		}
 	})
 
@@ -73,7 +88,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&pe); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(pe, ctx)
+			buildCalculationResponse(pe, ctx)
 		}
 	})
 
@@ -82,7 +97,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&cir); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(cir, ctx)
+			buildCalculationResponse(cir, ctx)
 		}
 	})
 
@@ -91,7 +106,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&si); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(si, ctx)
+			buildCalculationResponse(si, ctx)
 		}
 	})
 
@@ -100,7 +115,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&vi); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			calculationResponse(vi, ctx)
+			buildCalculationResponse(vi, ctx)
 		}
 	})
 }

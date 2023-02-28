@@ -10,15 +10,10 @@ import (
 
 func StartService() {
 	router := gin.Default()
-
 	registerMiddleware(router)
-
 	apiGroup := router.Group("/api")
-
 	registerHealthCheck(apiGroup)
-
 	finance.RegisterRoutes(apiGroup)
-
 	log.Fatal(router.Run(":3000"))
 }
 
