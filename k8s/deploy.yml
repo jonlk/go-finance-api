@@ -24,7 +24,7 @@ spec:
         - name: go-finance-api
           image: vertwave/go-finance-api:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           resources:
             requests:
               memory: "64Mi"
@@ -48,5 +48,5 @@ spec:
     - protocol: TCP
       name: http-unsecured
       port: 3000
-      targetPort: 3000
+      targetPort: 80
       
