@@ -1,10 +1,6 @@
 package finance
 
 import (
-	"net/http"
-	"reflect"
-	"time"
-
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -16,23 +12,12 @@ type calculationResponse struct {
 	Value           float64   `json:"value"`
 }
 
-func buildCalculationResponse(c calculation, ctx *gin.Context) {
-	value := c.calculate()
-	response := calculationResponse{
-		ResponseId:      uuid.New(),
-		Timestamp:       time.Now().Unix(),
-		CalculationType: reflect.TypeOf(c).Name(),
-		Value:           value,
-	}
-	ctx.JSON(http.StatusOK, &response)
-}
-
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/basicliquidityratio", func(ctx *gin.Context) {
 		var blr basicLiquidityRatio
-		if err := ctx.Bind(&blr); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&blr); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&blr, ctx)
 		}
@@ -40,8 +25,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/breakevenpoint", func(ctx *gin.Context) {
 		var bep breakEvenPoint
-		if err := ctx.Bind(&bep); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&bep); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&bep, ctx)
 		}
@@ -49,8 +34,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/cashflow", func(ctx *gin.Context) {
 		var cf cashFlow
-		if err := ctx.Bind(&cf); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&cf); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&cf, ctx)
 		}
@@ -58,8 +43,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/compoundinterest", func(ctx *gin.Context) {
 		var ci compoundInterest
-		if err := ctx.Bind(&ci); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&ci); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&ci, ctx)
 		}
@@ -67,8 +52,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/netincome", func(ctx *gin.Context) {
 		var ni netIncome
-		if err := ctx.Bind(&ni); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&ni); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&ni, ctx)
 		}
@@ -76,8 +61,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/networth", func(ctx *gin.Context) {
 		var nw netWorth
-		if err := ctx.Bind(&nw); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&nw); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&nw, ctx)
 		}
@@ -85,8 +70,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/peratio", func(ctx *gin.Context) {
 		var pe peRatio
-		if err := ctx.Bind(&pe); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&pe); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&pe, ctx)
 		}
@@ -94,8 +79,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/ruleof72", func(ctx *gin.Context) {
 		var cir compoundInterestRate
-		if err := ctx.Bind(&cir); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&cir); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&cir, ctx)
 		}
@@ -103,8 +88,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/simpleinterest", func(ctx *gin.Context) {
 		var si simpleInterest
-		if err := ctx.Bind(&si); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&si); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&si, ctx)
 		}
@@ -112,8 +97,8 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
 	apiGroup.GET("/variationofinvestment", func(ctx *gin.Context) {
 		var vi variationOfInvestment
-		if err := ctx.Bind(&vi); err != nil {
-			ctx.String(http.StatusBadRequest, err.Error())
+		if err := ctx.ShouldBind(&vi); err != nil {
+			ctx.Error(err)
 		} else {
 			buildCalculationResponse(&vi, ctx)
 		}

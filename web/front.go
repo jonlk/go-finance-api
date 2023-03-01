@@ -11,7 +11,6 @@ import (
 
 func StartService(port int16) {
 	router := gin.Default()
-	// router.SetTrustedProxies([]string{"192.168.1.2"})
 	registerMiddleware(router)
 	apiGroup := router.Group("/api")
 	registerHealthCheck(apiGroup)
