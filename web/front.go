@@ -2,6 +2,8 @@ package web
 
 import (
 	"context"
+	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -13,22 +15,23 @@ import (
 
 var ginLambda *ginadapter.GinLambda
 
-func StartService() {
+func StartService(runAsLambda bool, port int) {
+
 	router := gin.Default()
 	registerMiddleware(router)
 	apiGroup := router.Group("/api")
 	registerHealthCheck(apiGroup)
 	finance.RegisterRoutes(apiGroup)
 
-	ginLambda = ginadapter.New(router)
-
-	lambda.Start(Handler)
-
-	//log.Fatal(router.Run(fmt.Sprintf(":%v", port)))
+	if runAsLambda {
+		ginLambda = ginadapter.New(router)
+		lambda.Start(Handler)
+	} else {
+		log.Fatal(router.Run(fmt.Sprintf(":%v", port)))
+	}
 }
 
 func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	// If no name is provided in the HTTP request body, throw an error
 	return ginLambda.ProxyWithContext(ctx, req)
 }
 
