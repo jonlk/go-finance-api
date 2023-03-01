@@ -1,6 +1,7 @@
 package web
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -8,13 +9,13 @@ import (
 	"github.com/jonlk/go-finance-api/finance"
 )
 
-func StartService() {
+func StartService(port int16) {
 	router := gin.Default()
 	registerMiddleware(router)
 	apiGroup := router.Group("/api")
 	registerHealthCheck(apiGroup)
 	finance.RegisterRoutes(apiGroup)
-	log.Fatal(router.Run(":3000"))
+	log.Fatal(router.Run(fmt.Sprintf(":%v", port)))
 }
 
 func registerHealthCheck(apiGroup *gin.RouterGroup) {
