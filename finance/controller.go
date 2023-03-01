@@ -34,7 +34,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&blr); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(blr, ctx)
+			buildCalculationResponse(&blr, ctx)
 		}
 	})
 
@@ -43,7 +43,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&bep); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(bep, ctx)
+			buildCalculationResponse(&bep, ctx)
 		}
 	})
 
@@ -52,7 +52,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&cf); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(cf, ctx)
+			buildCalculationResponse(&cf, ctx)
 		}
 	})
 
@@ -61,7 +61,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&ci); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(ci, ctx)
+			buildCalculationResponse(&ci, ctx)
 		}
 	})
 
@@ -70,7 +70,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&ni); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(ni, ctx)
+			buildCalculationResponse(&ni, ctx)
 		}
 	})
 
@@ -79,7 +79,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&nw); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(nw, ctx)
+			buildCalculationResponse(&nw, ctx)
 		}
 	})
 
@@ -88,7 +88,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&pe); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(pe, ctx)
+			buildCalculationResponse(&pe, ctx)
 		}
 	})
 
@@ -97,7 +97,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&cir); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(cir, ctx)
+			buildCalculationResponse(&cir, ctx)
 		}
 	})
 
@@ -106,7 +106,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&si); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(si, ctx)
+			buildCalculationResponse(&si, ctx)
 		}
 	})
 
@@ -115,7 +115,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.Bind(&vi); err != nil {
 			ctx.String(http.StatusBadRequest, err.Error())
 		} else {
-			buildCalculationResponse(vi, ctx)
+			buildCalculationResponse(&vi, ctx)
 		}
 	})
 }

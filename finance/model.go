@@ -22,7 +22,9 @@ type compoundInterest struct {
 	LengthBorrowedInYears        float64 `form:"lengthBorrowedInYears" binding:"required"`
 }
 
-type compoundInterestRate float64
+type compoundInterestRate struct {
+	Value float64 `form:"value" binding:"required"`
+}
 
 type netIncome struct {
 	Revenue  float64 `form:"revenue" binding:"required"`

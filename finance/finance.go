@@ -29,7 +29,7 @@ func (ci compoundInterest) calculate() float64 {
 }
 
 func (ci compoundInterestRate) calculate() float64 {
-	result := 72 / ci
+	result := 72 / ci.Value
 	return float64(result)
 }
 
