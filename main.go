@@ -14,7 +14,7 @@ var (
 func main() {
 	runAsLambda, err := strconv.ParseBool(os.Getenv("RUN_AS_LAMBDA"))
 	if err != nil {
-		panic("could not determine operating mode")
+		panic("RUN_AS_LAMBDA environment variable not set (true or false)")
 	}
 
 	web.StartService(runAsLambda, PORT)
