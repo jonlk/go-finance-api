@@ -3,6 +3,7 @@ package finance
 import (
 	"net/http"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -10,19 +11,22 @@ import (
 )
 
 type calculationResponse struct {
-	ResponseId      uuid.UUID `json:"responseId"`
-	Timestamp       int64     `json:"timestamp"`
-	CalculationType string    `json:"calculationType"`
-	Value           float64   `json:"value"`
+	ResponseId      uuid.UUID   `json:"responseId"`
+	Timestamp       int64       `json:"timestamp"`
+	CalculationType string      `json:"calculationType"`
+	Result          calculation `json:"result"`
 }
 
 func buildCalculationResponse(c calculation, ctx *gin.Context) {
-	value := c.calculate()
+	c.calculate()
+
+	calcType := reflect.PointerTo(reflect.TypeOf(c)).String()
+
 	response := calculationResponse{
 		ResponseId:      uuid.New(),
 		Timestamp:       time.Now().Unix(),
-		CalculationType: reflect.TypeOf(c).Name(),
-		Value:           value,
+		CalculationType: strings.Split(calcType, ".")[1],
+		Result:          c,
 	}
 	ctx.JSON(http.StatusOK, &response)
 }
