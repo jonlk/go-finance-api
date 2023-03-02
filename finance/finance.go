@@ -3,59 +3,49 @@ package finance
 import "math"
 
 type calculation interface {
-	calculate() float64
+	calculate()
 }
 
-func (blr basicLiquidityRatio) calculate() float64 {
-	result := blr.MonetaryAssets / blr.MonthlyExpenses
-	return result
+func (blr *basicLiquidityRatio) calculate() {
+	blr.Result = blr.MonetaryAssets / blr.MonthlyExpenses
 }
 
-func (bep breakEvenPoint) calculate() float64 {
-	result := bep.FixedExpenses / bep.GrossProfitMarginInPercentage
-	return result
+func (bep *breakEvenPoint) calculate() {
+	bep.Result = bep.FixedExpenses / bep.GrossProfitMarginInPercentage
 }
 
-func (cf cashFlow) calculate() float64 {
-	result := cf.Income - cf.Expenses
-	return result
+func (cf *cashFlow) calculate() {
+	cf.Result = cf.Income - cf.Expenses
 }
 
-func (ci compoundInterest) calculate() float64 {
-	result := ci.Principal *
+func (ci *compoundInterest) calculate() {
+	ci.Result = ci.Principal *
 		math.Pow(1+(ci.AnnualInterestRate/ci.NumberTimesCompoundedPerYear),
 			ci.NumberTimesCompoundedPerYear*ci.LengthBorrowedInYears)
-	return result
 }
 
-func (ci compoundInterestRate) calculate() float64 {
-	result := 72 / ci.Value
-	return float64(result)
+func (ci *ruleOf72) calculate() {
+	ci.Result = 72 / ci.CompoundInterestRate
 }
 
-func (ni netIncome) calculate() float64 {
-	result := ni.Revenue - ni.Expenses
-	return result
+func (ni *netIncome) calculate() {
+	ni.Result = ni.Revenue - ni.Expenses
 }
 
-func (nw netWorth) calculate() float64 {
-	result := nw.Assets - nw.Debts
-	return result
+func (nw *netWorth) calculate() {
+	nw.Result = nw.Assets - nw.Debts
 }
 
-func (pe peRatio) calculate() float64 {
-	result := pe.PricePerShare / pe.EarningsPerShare
-	return result
+func (pe *peRatio) calculate() {
+	pe.Result = pe.PricePerShare / pe.EarningsPerShare
 }
 
-func (si simpleInterest) calculate() float64 {
-	result := si.Principal *
+func (si *simpleInterest) calculate() {
+	si.Result = si.Principal *
 		si.AnnualInterestRate *
 		si.LengthBorrowedInYears
-	return result
 }
 
-func (vi variationOfInvestment) calculate() float64 {
-	result := (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
-	return result
+func (vi *variationOfInvestment) calculate() {
+	vi.Result = (vi.CurrentPrice - vi.PurchasePrice) / vi.PurchasePrice
 }

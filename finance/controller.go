@@ -70,7 +70,7 @@ func RegisterRoutes(apiGroup *gin.RouterGroup) {
 	})
 
 	apiGroup.GET("/ruleof72", func(ctx *gin.Context) {
-		var cir compoundInterestRate
+		var cir ruleOf72
 		if err := ctx.ShouldBind(&cir); err != nil {
 			ctx.Error(err)
 		} else {
