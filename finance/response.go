@@ -9,6 +9,13 @@ import (
 	"github.com/google/uuid"
 )
 
+type calculationResponse struct {
+	ResponseId      uuid.UUID `json:"responseId"`
+	Timestamp       int64     `json:"timestamp"`
+	CalculationType string    `json:"calculationType"`
+	Value           float64   `json:"value"`
+}
+
 func buildCalculationResponse(c calculation, ctx *gin.Context) {
 	value := c.calculate()
 	response := calculationResponse{

@@ -2,15 +2,7 @@ package finance
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 )
-
-type calculationResponse struct {
-	ResponseId      uuid.UUID `json:"responseId"`
-	Timestamp       int64     `json:"timestamp"`
-	CalculationType string    `json:"calculationType"`
-	Value           float64   `json:"value"`
-}
 
 func RegisterRoutes(apiGroup *gin.RouterGroup) {
 
