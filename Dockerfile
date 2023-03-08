@@ -11,7 +11,8 @@ COPY ./ ./
 
 RUN go build -o /finance-api
 
-FROM alpine:3.17 as publish
+# FROM alpine:3.17 as publish
+FROM scratch
 
 COPY --from=build /finance-api ./
 
