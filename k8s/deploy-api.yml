@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: vertwave
-  
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -30,10 +30,10 @@ spec:
             initialDelaySeconds: 15
             timeoutSeconds: 15
           env:
-          - name: RUN_AS_LAMBDA
-            value: 'false'
-          - name: GIN_MODE
-            value: 'release'
+            - name: RUN_AS_LAMBDA
+              value: "false"
+            - name: GIN_MODE
+              value: "release"
           ports:
             - containerPort: 3000
           resources:
@@ -60,4 +60,3 @@ spec:
       name: http-unsecured
       port: 3000
       targetPort: 3000
-      
