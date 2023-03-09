@@ -16,6 +16,4 @@ FROM scratch
 
 COPY --from=build /finance-api ./
 
-EXPOSE 80
-
 CMD [ "/finance-api" ]
