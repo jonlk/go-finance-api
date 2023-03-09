@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: go-finance-api
-          image: vertwave/go-finance-api:latest
+          image: vertwave/micro-finance-api:1.0.0
           livenessProbe:
             httpGet:
               path: /api/health
