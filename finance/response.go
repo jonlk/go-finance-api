@@ -17,7 +17,7 @@ type calculationResponse struct {
 	Result          calculation `json:"result"`
 }
 
-func buildCalculationResponse(c calculation, ctx *gin.Context) {
+func BuildCalculationResponse(c calculation, ctx *gin.Context) {
 	c.calculate()
 
 	calcType := reflect.

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
 	"github.com/gin-gonic/gin"
-	"github.com/jonlk/go-finance-api/finance"
 )
 
 var ginLambda *ginadapter.GinLambda
@@ -21,7 +20,7 @@ func StartService(runAsLambda bool, port int) {
 	registerMiddleware(router)
 	apiGroup := router.Group("/api")
 	registerHealthCheck(apiGroup)
-	finance.RegisterRoutes(apiGroup)
+	registerRoutes(apiGroup)
 
 	if runAsLambda {
 		ginLambda = ginadapter.New(router)
