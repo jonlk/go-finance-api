@@ -1,19 +1,16 @@
-FROM golang:1.20.1-alpine3.17 as build
+FROM golang:1.20.2-bullseye as base
 
-WORKDIR /app
+WORKDIR $GOPATH/src/app/
 
-COPY go.mod ./
-COPY go.sum ./
+COPY . .
 
 RUN go mod download
+RUN go mod verify
 
-COPY ./ ./
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /finance-api .
 
-RUN go build -o /finance-api
-
-# FROM alpine:3.17 as publish
 FROM scratch
 
-COPY --from=build /finance-api ./
+COPY --from=base /finance-api ./
 
 CMD [ "/finance-api" ]
