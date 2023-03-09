@@ -20,7 +20,9 @@ type calculationResponse struct {
 func buildCalculationResponse(c calculation, ctx *gin.Context) {
 	c.calculate()
 
-	calcType := reflect.PointerTo(reflect.TypeOf(c)).String()
+	calcType := reflect.
+		PointerTo(reflect.TypeOf(c)).
+		String()
 
 	response := calculationResponse{
 		ResponseId:      uuid.New(),

@@ -12,7 +12,10 @@ var (
 )
 
 func main() {
-	runAsLambda, err := strconv.ParseBool(os.Getenv("RUN_AS_LAMBDA"))
+
+	runAsLambda, err := strconv.
+		ParseBool(os.Getenv("RUN_AS_LAMBDA"))
+
 	if err != nil {
 		panic("RUN_AS_LAMBDA environment variable not set (true or false)")
 	}
