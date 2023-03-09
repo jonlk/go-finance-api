@@ -12,7 +12,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&blr); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&blr, ctx)
+			result := finance.GetFinanceResult(&blr)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -21,7 +22,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&bep); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&bep, ctx)
+			result := finance.GetFinanceResult(&bep)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -30,7 +32,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&cf); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&cf, ctx)
+			result := finance.GetFinanceResult(&cf)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -39,7 +42,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&ci); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&ci, ctx)
+			result := finance.GetFinanceResult(&ci)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -48,7 +52,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&ni); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&ni, ctx)
+			result := finance.GetFinanceResult(&ni)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -57,7 +62,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&nw); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&nw, ctx)
+			result := finance.GetFinanceResult(&nw)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -66,7 +72,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&pe); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&pe, ctx)
+			result := finance.GetFinanceResult(&pe)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -75,7 +82,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&cir); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&cir, ctx)
+			result := finance.GetFinanceResult(&cir)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -84,7 +92,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&si); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&si, ctx)
+			result := finance.GetFinanceResult(&si)
+			buildResponseModel(&result, ctx)
 		}
 	})
 
@@ -93,7 +102,8 @@ func registerRoutes(apiGroup *gin.RouterGroup) {
 		if err := ctx.ShouldBind(&vi); err != nil {
 			ctx.Error(err)
 		} else {
-			finance.BuildCalculationResponse(&vi, ctx)
+			result := finance.GetFinanceResult(&vi)
+			buildResponseModel(&result, ctx)
 		}
 	})
 }
