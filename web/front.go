@@ -35,13 +35,13 @@ func StartService(runAsLambda bool, port int) {
 
 	if runAsLambda {
 		ginLambda = ginadapter.New(router)
-		lambda.Start(handler)
+		lambda.Start(lambdaHandler)
 	} else {
 		log.Fatal(router.Run(fmt.Sprintf(":%v", port)))
 	}
 }
 
-func handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func lambdaHandler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	return ginLambda.ProxyWithContext(ctx, req)
 }
 
