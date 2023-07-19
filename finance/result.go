@@ -7,18 +7,18 @@ import (
 
 type FinanceResult struct {
 	CalculationType string      `json:"calculationType"`
-	Data            calculation `json:"data"`
+	Data            Calculation `json:"data"`
 }
 
-func GetFinanceResult(c calculation) FinanceResult {
-	c.calculate()
+func GetFinanceResult(calculation Calculation) FinanceResult {
+	calculation.calculate()
 
 	calcType := reflect.
-		PointerTo(reflect.TypeOf(c)).
+		PointerTo(reflect.TypeOf(calculation)).
 		String()
 
 	return FinanceResult{
 		CalculationType: strings.Split(calcType, ".")[1],
-		Data:            c,
+		Data:            calculation,
 	}
 }
