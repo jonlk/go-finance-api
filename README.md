@@ -3,6 +3,7 @@
 ### Simple finance calculations over http with the gin gonic framework
 ---
 ### Updates
+- 7/19/2023 - Updated API Controller endpoints to infer type
 - 3/1/2023 - Updated to work with AWS Lambda (fat) or standalone
 - 2/28/2023 - Updated to work with Gin query binding
 - 2/27/2023 - Updated to work with Kubernetes
