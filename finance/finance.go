@@ -2,7 +2,7 @@ package finance
 
 import "math"
 
-type calculation interface {
+type Calculation interface {
 	calculate()
 }
 
