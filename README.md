@@ -1,21 +1,29 @@
 # Finance Api
-## Go Version 1.20
+
+## Go Version 1.25.3
+
 ### Simple finance calculations over http with the gin gonic framework
+
 ---
+
 ### Updates
+
+- 10/23/2025 - Updated Go
 - 7/19/2023 - Updated API Controller endpoints to infer type
 - 3/1/2023 - Updated to work with AWS Lambda (fat) or standalone
 - 2/28/2023 - Updated to work with Gin query binding
 - 2/27/2023 - Updated to work with Kubernetes
+
 ---
 
 Notes for local run:
+
 - Export the environment variable RUN_AS_LAMBDA=`false` or `true`
 - May need to adjust port as necessary
 - Add `gin.SetMode(gin.ReleaseMode)` for release
 
-
 Kubernetes Notes:
+
 - Run in Minikube with Docker Env (adjust as necessary for your environment)
 - Don't forget to enable registry and ingress
 - `docker build -t vertwave/go-finance-api:latest .`
